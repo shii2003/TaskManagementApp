@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { verifyToken } from "../services/token.service";
+import { verifyToken } from "../services/token.services";
 
 export const protect = (
     req: Request,

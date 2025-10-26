@@ -2,7 +2,7 @@ import User from "../models/User";
 import { AppError } from "../utils/AppError";
 import { comparePasswords, hashPassword } from "../utils/hashPassword";
 import logger from "../utils/logger";
-import { generateToken } from "./token.service";
+import { generateToken } from "./token.services";
 
 interface AuthResponse {
     token: string;

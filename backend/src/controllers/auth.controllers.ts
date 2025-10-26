@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response } from "express";
 import { ApiResponse, } from "../utils/ApiResponse";
-import { loginSchema, registerSchema } from "../validations/auth.validation";
+import { loginSchema, registerSchema } from "../validations/auth.validations";
 import { AppError } from "../utils/AppError";
-import { createUser, loginUser } from "../services/auth.service";
+import { createUser, loginUser } from "../services/auth.services";
 
 export const signupHanlder = async (req: Request, res: Response, next: NextFunction) => {
     try {

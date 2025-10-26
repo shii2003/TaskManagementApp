@@ -3,10 +3,10 @@ dotenv.config();
 import express, { Request, Response } from "express";
 import cors from "cors";
 import { MONGO_URI, PORT } from "./constants/env";
-import requestLogger from "./middlewares/requestLogger";
-import { errorHandler } from "./middlewares/errorHandler";
+import requestLogger from "./middlewares/requestLogger.middlewares";
+import { errorHandler } from "./middlewares/errorHandler.middlewares";
 import logger from "./utils/logger";
-import authRoutes from "./routes/auth.routes";
+import routes from "./routes/index.routes"
 import { connectDB } from "./config/db";
 
 const app = express();
@@ -24,7 +24,7 @@ app.get("/api/health", (req: Request, res: Response) => {
         })
 });
 
-app.use("/api/auth", authRoutes);
+app.use("/api", routes);
 
 app.use(errorHandler);
 
