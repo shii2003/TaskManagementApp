@@ -12,4 +12,4 @@ export const PORT = getEnv("PORT", "3000");
 export const JWT_SECRET = getEnv("JWT_SECRET");
 export const JWT_EXPIRES_IN = getEnv("JWT_EXPIRES_IN", "7d");
 export const MONGO_URI = getEnv("MONGO_URI");
-export const APP_ORIGIN = getEnv("APP_ORIGIN");
+// export const APP_ORIGIN = getEnv("APP_ORIGIN");

@@ -30,7 +30,7 @@ export class AppError extends Error {
         return new AppError(message, 409);
     }
 
-    static validationError(message: string = "Validation Error") {
+    static validationError(message: string = "Validation Error", details?: string[]) {
         return new AppError(message, 422);
     }
 

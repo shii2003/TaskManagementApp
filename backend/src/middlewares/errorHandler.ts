@@ -28,4 +28,3 @@ export const errorHandler = (
     });
 };
 
-//check if logger is working fine

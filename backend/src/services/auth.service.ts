@@ -65,12 +65,12 @@ export const loginUser = async (
 
         const user = await User.findOne({ email });
         if (!user) {
-            throw AppError.unauthorized("Invalid email or password");
+            throw AppError.unauthorized("User does not exist.");
         }
 
         const isPasswordValid = await comparePasswords(password, user.password);
         if (!isPasswordValid) {
-            throw AppError.unauthorized("Invalid email or password");
+            throw AppError.unauthorized("Wrong password.");
         }
 
         logger.info(`User logged in: ${user.email}`);
