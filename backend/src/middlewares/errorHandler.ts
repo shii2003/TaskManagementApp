@@ -1,19 +1,31 @@
-import { NextFunction, Request, Response } from "express";
+import { Request, Response, NextFunction } from "express";
+import { AppError } from "../utils/AppError";
 import logger from "../utils/logger";
 
-interface AppError extends Error {
-    status?: number;
-    statusCode?: number;
-}
-
 export const errorHandler = (
-    err: AppError,
+    err: Error,
     req: Request,
     res: Response,
     next: NextFunction
 ) => {
-    const status = err.status || err.statusCode || 500;
-    const message = err.message || "Internal Server Error";
-    logger.error("Error: %s, stack: %s", message, err.stack || "");
-    res.status(status).json({ success: false, message });
-}
+    if (res.headersSent) {
+        return next(err);
+    }
+
+    let statusCode = 500;
+    let message = "Internal Server Error";
+
+    if (err instanceof AppError) {
+        statusCode = err.statusCode;
+        message = err.message;
+    } else {
+        logger.error("Unhandled Error:", err);
+    }
+
+    return res.status(statusCode).json({
+        success: false,
+        message,
+    });
+};
+
+//check if logger is working fine
