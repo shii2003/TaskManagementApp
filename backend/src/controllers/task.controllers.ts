@@ -10,6 +10,7 @@ import {
     updateTaskStatus,
 } from "../services/task.services";
 import { createTaskSchema, updateStatusSchema, updateTaskSchema } from "../validations/task.validations";
+import Task from "../models/Task";
 
 export const createTaskHandler = async (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -93,6 +94,22 @@ export const deleteTaskHandler = async (req: Request, res: Response, next: NextF
             status(200).json(ApiResponse.success(
                 "Task deleted successfully"
             ));
+    } catch (error) {
+        next(error);
+    }
+};
+
+export const getMyTasksHandler = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const userId = req.user?.id;
+
+        const tasks = await Task.find({ createdBy: userId })
+            .populate("assignedTo", "name email")
+            .sort({ createdAt: -1 });
+
+        return res
+            .status(200)
+            .json(ApiResponse.success("Tasks fetched successfully", tasks));
     } catch (error) {
         next(error);
     }

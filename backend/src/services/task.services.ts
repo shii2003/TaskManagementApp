@@ -38,7 +38,9 @@ export const getTasks = async (userId: string, queryParams: any) => {
         if (!userId) throw AppError.unauthorized("User not authenticated");
 
         const { status, search, assignedTo } = queryParams;
-        const query: any = {};
+        const query: any = {
+            createdBy: userId // Only return tasks created by the authenticated user
+        };
 
         if (status) query.status = status;
         if (assignedTo) query.assignedTo = assignedTo;

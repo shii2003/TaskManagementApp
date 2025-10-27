@@ -30,6 +30,7 @@ app.use(errorHandler);
 
 const start = async () => {
     try {
+
         await connectDB(MONGO_URI);
         app.listen(PORT, () => {
             logger.info(`Server running on PORT:${PORT}.`)

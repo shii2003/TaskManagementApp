@@ -6,7 +6,7 @@ import userRoutes from "./user.routes"
 const router = Router();
 
 router.use("/auth", authRoutes);
-router.use("/task", taskRoutes);
+router.use("/tasks", taskRoutes);
 router.use("/users", userRoutes);
 
 export default router;

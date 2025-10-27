@@ -40,4 +40,14 @@ export const loginHandler = async (req: Request, res: Response, next: NextFuncti
     }
 };
 
+export const logoutHandler = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        return res
+            .status(200)
+            .json(ApiResponse.success("Logged out successfully", null));
+    } catch (err) {
+        next(AppError.internal("Failed to logout user"));
+    }
+}
+
 
