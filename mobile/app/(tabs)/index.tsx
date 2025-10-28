@@ -1,32 +1,32 @@
-import { View, Text, ScrollView, TouchableOpacity } from "react-native";
+import { View, Text, ScrollView, TouchableOpacity, Image } from "react-native";
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Ionicons, Feather } from "@expo/vector-icons";
 
 const Home = () => {
-  const stats = {
-    today: 5,
-    inProgress: 12,
-    completed: 45,
-    total: 62
-  };
-
-  const recentTasks = [
-    { title: "Design Homepage", status: "in_progress", priority: "high" },
-    { title: "Fix Login Bug", status: "todo", priority: "high" },
-    { title: "Update Documentation", status: "completed", priority: "low" },
+  const infoCards = [
+    {
+      title: "Welcome to TaskFlow",
+      description: "Your personal task management companion designed to help you stay organized and productive.",
+      icon: "rocket-outline",
+      color: "#10B981",
+      bgColor: "#ECFDF5"
+    },
+    {
+      title: "Smart Organization",
+      description: "Create, assign, and track tasks with ease. Set priorities and deadlines to manage your workflow effectively.",
+      icon: "bulb-outline",
+      color: "#3B82F6",
+      bgColor: "#EFF6FF"
+    },
+    {
+      title: "Team Collaboration",
+      description: "Assign tasks to team members and track progress in real-time. Stay connected with your team.",
+      icon: "people-outline",
+      color: "#8B5CF6",
+      bgColor: "#FAF5FF"
+    },
   ];
-
-  const getStatusIcon = (status: string) => {
-    switch (status) {
-      case "in_progress":
-        return { icon: "timer-outline", color: "#CA8A04" };
-      case "completed":
-        return { icon: "checkmark-circle", color: "#10B981" };
-      default:
-        return { icon: "ellipse-outline", color: "#3B82F6" };
-    }
-  };
 
   return (
     <SafeAreaView className="flex-1 bg-gray-50" edges={["top"]}>
@@ -35,154 +35,54 @@ const Home = () => {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ paddingBottom: 24 }}
       >
-        {/* Header */}
         <View className="bg-white px-6 pt-6 pb-4">
           <Text className="text-2xl font-bold text-gray-800 mb-1">
-            Welcome Back 👋
+            Welcome to TaskFlow 🚀
           </Text>
           <Text className="text-gray-500 text-sm">
-            Stay on top of your tasks and manage your day efficiently
+            Your personal task management companion for staying organized and productive
           </Text>
         </View>
 
-        {/* Quick Stats */}
         <View className="px-6 py-4">
-          <Text className="text-lg font-semibold text-gray-800 mb-3">
-            Quick Stats
-          </Text>
-
-          <View className="flex-row justify-between mb-3">
-            <View className="flex-1 bg-emerald-500 rounded-2xl p-4 mr-2 shadow-sm">
-              <View className="flex-row items-center justify-between">
-                <View>
-                  <Text className="text-white font-bold text-2xl">{stats.today}</Text>
-                  <Text className="text-emerald-100 text-xs mt-1">Tasks Today</Text>
-                </View>
-                <View className="w-12 h-12 bg-white/20 rounded-full items-center justify-center">
-                  <Ionicons name="calendar" size={24} color="white" />
-                </View>
-              </View>
-            </View>
-
-            <View className="flex-1 bg-yellow-500 rounded-2xl p-4 ml-2 shadow-sm">
-              <View className="flex-row items-center justify-between">
-                <View>
-                  <Text className="text-white font-bold text-2xl">{stats.inProgress}</Text>
-                  <Text className="text-yellow-100 text-xs mt-1">In Progress</Text>
-                </View>
-                <View className="w-12 h-12 bg-white/20 rounded-full items-center justify-center">
-                  <Ionicons name="time" size={24} color="white" />
-                </View>
-              </View>
-            </View>
-          </View>
-
-          <View className="flex-row justify-between">
-            <View className="flex-1 bg-blue-500 rounded-2xl p-4 mr-2 shadow-sm">
-              <View className="flex-row items-center justify-between">
-                <View>
-                  <Text className="text-white font-bold text-2xl">{stats.completed}</Text>
-                  <Text className="text-blue-100 text-xs mt-1">Completed</Text>
-                </View>
-                <View className="w-12 h-12 bg-white/20 rounded-full items-center justify-center">
-                  <Ionicons name="checkmark-done" size={24} color="white" />
-                </View>
-              </View>
-            </View>
-
-            <View className="flex-1 bg-purple-500 rounded-2xl p-4 ml-2 shadow-sm">
-              <View className="flex-row items-center justify-between">
-                <View>
-                  <Text className="text-white font-bold text-2xl">{stats.total}</Text>
-                  <Text className="text-purple-100 text-xs mt-1">Total Tasks</Text>
-                </View>
-                <View className="w-12 h-12 bg-white/20 rounded-full items-center justify-center">
-                  <Ionicons name="list" size={24} color="white" />
-                </View>
-              </View>
-            </View>
+          <View className=" rounded-2xl overflow-hidden">
+            <Image
+              source={require('../../assets/background.png')}
+              className="w-full h-48"
+              resizeMode="contain"
+            />
           </View>
         </View>
-
-        {/* Recent Tasks */}
         <View className="px-6 py-4">
-          <View className="flex-row justify-between items-center mb-4">
-            <Text className="text-lg font-semibold text-gray-800">
-              Recent Tasks
-            </Text>
-            <TouchableOpacity>
-              <Text className="text-emerald-600 font-semibold text-sm">
-                View All
-              </Text>
-            </TouchableOpacity>
-          </View>
+          <Text className="text-lg font-semibold text-gray-800 mb-4">
+            About TaskFlow
+          </Text>
 
-          <View className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-            {recentTasks.map((task, index) => {
-              const { icon, color } = getStatusIcon(task.status);
-              return (
-                <TouchableOpacity
-                  key={index}
-                  className="flex-row items-center px-4 py-4 border-b border-gray-100 last:border-b-0"
-                >
-                  <View className={`w-10 h-10 rounded-full items-center justify-center mr-3`}
-                    style={{ backgroundColor: `${color}20` }}>
-                    <Ionicons name={icon as any} size={20} color={color} />
+          {infoCards.map((card, index) => (
+            <View key={index} className="mb-4">
+              <View
+                className="rounded-2xl p-4 shadow-sm border border-gray-100"
+                style={{ backgroundColor: card.bgColor }}
+              >
+                <View className="flex-row items-start">
+                  <View
+                    className="w-12 h-12 rounded-full items-center justify-center mr-4"
+                    style={{ backgroundColor: card.color + '20' }}
+                  >
+                    <Ionicons name={card.icon as any} size={24} color={card.color} />
                   </View>
                   <View className="flex-1">
-                    <Text className="text-gray-800 font-semibold mb-0.5">
-                      {task.title}
+                    <Text className="text-gray-800 font-bold text-base mb-2">
+                      {card.title}
                     </Text>
-                    <Text className="text-gray-400 text-xs capitalize">
-                      {task.status.replace("_", " ")} • {task.priority} priority
+                    <Text className="text-gray-600 text-sm leading-5">
+                      {card.description}
                     </Text>
                   </View>
-                  <Ionicons name="chevron-forward" size={20} color="#9CA3AF" />
-                </TouchableOpacity>
-              );
-            })}
-          </View>
-        </View>
-
-        {/* Quick Actions */}
-        <View className="px-6 py-4 pb-8">
-          <Text className="text-lg font-semibold text-gray-800 mb-4">
-            Quick Actions
-          </Text>
-
-          <View className="flex-row flex-wrap">
-            <TouchableOpacity className="w-[48%] rounded-2xl p-4 mr-2 mb-2 shadow-sm border border-emerald-200" style={{ backgroundColor: '#ECFDF5' }}>
-              <View className="w-12 h-12 bg-emerald-500 rounded-full items-center justify-center mb-3">
-                <Feather name="plus" size={24} color="white" />
+                </View>
               </View>
-              <Text className="text-gray-800 font-bold text-base">Create Task</Text>
-              <Text className="text-gray-500 text-xs mt-1">Add a new task</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity className="w-[48%] rounded-2xl p-4 ml-2 mb-2 shadow-sm border border-blue-200" style={{ backgroundColor: '#EFF6FF' }}>
-              <View className="w-12 h-12 bg-blue-500 rounded-full items-center justify-center mb-3">
-                <Ionicons name="search" size={24} color="white" />
-              </View>
-              <Text className="text-gray-800 font-bold text-base">Search Tasks</Text>
-              <Text className="text-gray-500 text-xs mt-1">Find tasks quickly</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity className="w-[48%] rounded-2xl p-4 mr-2 shadow-sm border border-purple-200" style={{ backgroundColor: '#FAF5FF' }}>
-              <View className="w-12 h-12 bg-purple-500 rounded-full items-center justify-center mb-3">
-                <Ionicons name="stats-chart" size={24} color="white" />
-              </View>
-              <Text className="text-gray-800 font-bold text-base">Analytics</Text>
-              <Text className="text-gray-500 text-xs mt-1">View statistics</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity className="w-[48%] rounded-2xl p-4 ml-2 shadow-sm border border-yellow-200" style={{ backgroundColor: '#FEFCE8' }}>
-              <View className="w-12 h-12 bg-yellow-500 rounded-full items-center justify-center mb-3">
-                <Ionicons name="settings" size={24} color="white" />
-              </View>
-              <Text className="text-gray-800 font-bold text-base">Settings</Text>
-              <Text className="text-gray-500 text-xs mt-1">Manage preferences</Text>
-            </TouchableOpacity>
-          </View>
+            </View>
+          ))}
         </View>
       </ScrollView>
     </SafeAreaView>

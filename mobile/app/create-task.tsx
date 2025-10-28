@@ -28,14 +28,13 @@ const CreateTask = () => {
         { email: 'sarah.wilson@example.com', name: 'Sarah Wilson' },
     ];
 
-    // Load task data for edit mode
+
     React.useEffect(() => {
         if (isEditMode && id) {
             dispatch(fetchTaskById(id as string));
         }
     }, [isEditMode, id, dispatch]);
 
-    // Populate form when editing
     React.useEffect(() => {
         if (isEditMode && currentTask) {
             setTitle(currentTask.title);
@@ -87,7 +86,7 @@ const CreateTask = () => {
 
     return (
         <SafeAreaView className="flex-1 bg-gray-50" edges={["top"]}>
-            {/* Header */}
+
             <View className="bg-white border-b border-gray-200 px-6 py-4 flex-row items-center justify-between">
                 <View className="flex-row items-center">
                     <TouchableOpacity onPress={() => router.back()} className="mr-3">
@@ -125,7 +124,6 @@ const CreateTask = () => {
                         </View>
                     </View>
 
-                    {/* Description Input */}
                     <View className="mb-6">
                         <Text className="text-gray-700 font-semibold mb-2">Description</Text>
                         <View className="bg-white border border-gray-200 rounded-xl px-4 py-3 h-32">
@@ -141,7 +139,6 @@ const CreateTask = () => {
                         </View>
                     </View>
 
-                    {/* Status Selection */}
                     <View className="mb-6">
                         <Text className="text-gray-700 font-semibold mb-2">Status</Text>
                         <View className="flex-row gap-3">
@@ -167,7 +164,6 @@ const CreateTask = () => {
                         </View>
                     </View>
 
-                    {/* Assigned To Selection */}
                     <View className="mb-6">
                         <Text className="text-gray-700 font-semibold mb-2">Assign To</Text>
                         <TouchableOpacity

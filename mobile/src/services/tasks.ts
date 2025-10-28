@@ -36,10 +36,14 @@ export interface TaskQueryParams {
     search?: string;
 }
 
-// Task API calls
+
 export const taskAPI = {
     getAll: async (params?: TaskQueryParams): Promise<Task[]> => {
-        const response = await api.get<{ success: boolean; message: string; data: Task[] }>('/tasks', { params });
+        const response = await api.get<{
+            success: boolean;
+            message: string;
+            data: Task[]
+        }>('/tasks', { params });
         if (response.data.success && response.data.data) {
             return response.data.data;
         }
@@ -47,7 +51,11 @@ export const taskAPI = {
     },
 
     getById: async (id: string): Promise<Task> => {
-        const response = await api.get<{ success: boolean; message: string; data: Task }>(`/tasks/${id}`);
+        const response = await api.get<{
+            success: boolean;
+            message: string;
+            data: Task
+        }>(`/tasks/${id}`);
         if (response.data.success && response.data.data) {
             return response.data.data;
         }
@@ -55,7 +63,11 @@ export const taskAPI = {
     },
 
     create: async (data: CreateTaskData): Promise<Task> => {
-        const response = await api.post<{ success: boolean; message: string; data: Task }>('/tasks', data);
+        const response = await api.post<{
+            success: boolean;
+            message: string;
+            data: Task
+        }>('/tasks', data);
         if (response.data.success && response.data.data) {
             return response.data.data;
         }
@@ -63,7 +75,11 @@ export const taskAPI = {
     },
 
     update: async (id: string, data: UpdateTaskData): Promise<Task> => {
-        const response = await api.put<{ success: boolean; message: string; data: Task }>(`/tasks/${id}`, data);
+        const response = await api.put<{
+            success: boolean;
+            message: string;
+            data: Task
+        }>(`/tasks/${id}`, data);
         if (response.data.success && response.data.data) {
             return response.data.data;
         }
@@ -72,14 +88,18 @@ export const taskAPI = {
 
     delete: async (id: string): Promise<void> => {
         const response = await api.delete(`/tasks/${id}`);
-        // Backend returns success message for delete, no data
+
         if (!response.data.success) {
             throw new Error(response.data.message || 'Failed to delete task');
         }
     },
 
     updateStatus: async (id: string, status: 'todo' | 'in_progress' | 'completed'): Promise<Task> => {
-        const response = await api.patch<{ success: boolean; message: string; data: Task }>(`/tasks/${id}/status`, { status });
+        const response = await api.patch<{
+            success: boolean;
+            message: string;
+            data: Task
+        }>(`/tasks/${id}/status`, { status });
         if (response.data.success && response.data.data) {
             return response.data.data;
         }
