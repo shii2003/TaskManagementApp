@@ -1,4 +1,4 @@
-import Task, { TaskStatus } from "../models/Task";
+import Task, { TaskStatus, AssignedUserEmail } from "../models/Task";
 import { AppError } from "../utils/AppError";
 import logger from "../utils/logger";
 
@@ -7,7 +7,7 @@ export const createTask = async (
     title: string,
     description?: string,
     status?: TaskStatus,
-    assignedTo?: string
+    assignedTo?: AssignedUserEmail
 ) => {
     try {
         if (!userId) throw AppError.unauthorized("User not authenticated");
@@ -21,8 +21,7 @@ export const createTask = async (
         });
 
         const populatedTask = await Task.findById(task._id)
-            .populate("createdBy", "name email")
-            .populate("assignedTo", "name email");
+            .populate("createdBy", "name email");
 
         logger.info(`Task created by user ${userId}: ${title}`);
         return populatedTask;
@@ -39,7 +38,7 @@ export const getTasks = async (userId: string, queryParams: any) => {
 
         const { status, search, assignedTo } = queryParams;
         const query: any = {
-            createdBy: userId // Only return tasks created by the authenticated user
+            createdBy: userId
         };
 
         if (status) query.status = status;
@@ -53,7 +52,6 @@ export const getTasks = async (userId: string, queryParams: any) => {
 
         const tasks = await Task.find(query)
             .populate("createdBy", "name email")
-            .populate("assignedTo", "name email")
             .sort({ createdAt: -1 });
 
         return tasks;
@@ -67,8 +65,7 @@ export const getTasks = async (userId: string, queryParams: any) => {
 export const getTaskById = async (id: string) => {
     try {
         const task = await Task.findById(id)
-            .populate("createdBy", "name email")
-            .populate("assignedTo", "name email");
+            .populate("createdBy", "name email");
 
         if (!task) throw AppError.notFound("Task not found");
 
@@ -83,7 +80,7 @@ export const getTaskById = async (id: string) => {
 export const updateTask = async (
     id: string,
     userId: string,
-    updates: { title?: string; description?: string; status?: TaskStatus; assignedTo?: string }
+    updates: { title?: string; description?: string; status?: TaskStatus; assignedTo?: AssignedUserEmail }
 ) => {
     try {
         const task = await Task.findById(id);
@@ -96,8 +93,7 @@ export const updateTask = async (
         await task.save();
 
         const updatedTask = await Task.findById(id)
-            .populate("createdBy", "name email")
-            .populate("assignedTo", "name email");
+            .populate("createdBy", "name email");
 
         logger.info(`Task updated by user ${userId}: ${id}`);
         return updatedTask;
@@ -139,8 +135,7 @@ export const updateTaskStatus = async (id: string, status: TaskStatus) => {
         await task.save();
 
         const updatedTask = await Task.findById(id)
-            .populate("createdBy", "name email")
-            .populate("assignedTo", "name email");
+            .populate("createdBy", "name email");
 
         logger.info(`Task status updated: ${id} -> ${status}`);
         return updatedTask;

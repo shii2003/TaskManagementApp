@@ -1,15 +1,13 @@
 import api from './api';
 
+export type AssignedUserEmail = 'john.doe@example.com' | 'jane.smith@example.com' | 'mike.johnson@example.com' | 'sarah.wilson@example.com';
+
 export interface Task {
     _id: string;
     title: string;
     description?: string;
     status: 'todo' | 'in_progress' | 'completed';
-    assignedTo?: {
-        _id: string;
-        name: string;
-        email: string;
-    };
+    assignedTo?: AssignedUserEmail;
     createdBy: {
         _id: string;
         name: string;
@@ -23,14 +21,14 @@ export interface CreateTaskData {
     title: string;
     description?: string;
     status?: 'todo' | 'in_progress' | 'completed';
-    assignedTo?: string;
+    assignedTo?: AssignedUserEmail;
 }
 
 export interface UpdateTaskData {
     title?: string;
     description?: string;
     status?: 'todo' | 'in_progress' | 'completed';
-    assignedTo?: string;
+    assignedTo?: AssignedUserEmail;
 }
 
 export interface TaskQueryParams {

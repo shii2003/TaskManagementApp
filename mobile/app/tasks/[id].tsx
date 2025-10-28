@@ -125,8 +125,7 @@ const TaskDetail = () => {
                             </View>
                             <View className="flex-1">
                                 <Text className="text-xs text-gray-500 mb-0.5">Assigned To</Text>
-                                <Text className="text-gray-800 font-semibold">{currentTask.assignedTo.name}</Text>
-                                <Text className="text-gray-500 text-xs">{currentTask.assignedTo.email}</Text>
+                                <Text className="text-gray-800 font-semibold">{currentTask.assignedTo}</Text>
                             </View>
                         </View>
                     )}
@@ -166,14 +165,14 @@ const TaskDetail = () => {
                                 key={status}
                                 onPress={() => handleStatusChange(status)}
                                 className={`flex-1 py-3 rounded-xl border-2 ${currentTask.status === status
-                                        ? "bg-emerald-50 border-emerald-500"
-                                        : "bg-white border-gray-200"
+                                    ? "bg-emerald-50 border-emerald-500"
+                                    : "bg-white border-gray-200"
                                     }`}
                             >
                                 <Text
                                     className={`text-center font-semibold capitalize ${currentTask.status === status
-                                            ? "text-emerald-600"
-                                            : "text-gray-600"
+                                        ? "text-emerald-600"
+                                        : "text-gray-600"
                                         }`}
                                 >
                                     {status.replace("_", " ")}
@@ -185,7 +184,10 @@ const TaskDetail = () => {
 
                 {/* Action Buttons */}
                 <View className="px-6 pb-8">
-                    <TouchableOpacity className="bg-emerald-500 py-4 rounded-xl mb-3 shadow-sm">
+                    <TouchableOpacity
+                        className="bg-emerald-500 py-4 rounded-xl mb-3 shadow-sm"
+                        onPress={() => router.push(`/create-task?id=${id}`)}
+                    >
                         <Text className="text-white text-center font-bold text-lg">
                             Edit Task
                         </Text>

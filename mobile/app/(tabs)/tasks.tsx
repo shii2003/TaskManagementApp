@@ -65,8 +65,7 @@ const Tasks = () => {
         return (
             task.title.toLowerCase().includes(query) ||
             task.description?.toLowerCase().includes(query) ||
-            task.assignedTo?.name.toLowerCase().includes(query) ||
-            task.assignedTo?.email.toLowerCase().includes(query)
+            task.assignedTo?.toLowerCase().includes(query)
         );
     });
 
@@ -96,7 +95,7 @@ const Tasks = () => {
                 {item.assignedTo && (
                     <View className="flex-row items-center">
                         <Ionicons name="person-outline" size={14} color="#9CA3AF" />
-                        <Text className="text-xs text-gray-500 ml-1">{item.assignedTo.name}</Text>
+                        <Text className="text-xs text-gray-500 ml-1">{item.assignedTo}</Text>
                     </View>
                 )}
 

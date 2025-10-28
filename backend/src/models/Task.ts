@@ -2,11 +2,13 @@ import { Schema, model, Document, Types } from "mongoose";
 
 export type TaskStatus = "todo" | "in_progress" | "completed";
 
+export type AssignedUserEmail = 'john.doe@example.com' | 'jane.smith@example.com' | 'mike.johnson@example.com' | 'sarah.wilson@example.com';
+
 export interface ITask extends Document {
     title: string;
     description?: string;
     status: TaskStatus;
-    assignedTo?: Types.ObjectId;
+    assignedTo?: AssignedUserEmail;
     createdBy: Types.ObjectId;
     createdAt: Date;
     updatedAt: Date;
@@ -30,8 +32,8 @@ const taskSchema = new Schema<ITask>(
             default: "todo"
         },
         assignedTo: {
-            type: Schema.Types.ObjectId,
-            ref: "User"
+            type: String,
+            enum: ['john.doe@example.com', 'jane.smith@example.com', 'mike.johnson@example.com', 'sarah.wilson@example.com']
         },
         createdBy: {
             type: Schema.Types.ObjectId,

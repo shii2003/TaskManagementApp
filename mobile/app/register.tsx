@@ -21,26 +21,24 @@ const Register = () => {
         }
     }, [error]);
 
-    // Email validation
     const isValidEmail = (email: string): boolean => {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return emailRegex.test(email);
     };
 
-    // Password validation
     const isValidPassword = (password: string): boolean => {
-        // At least 6 characters, contains at least one letter and one number
+
         return password.length >= 6 && /[A-Za-z]/.test(password) && /[0-9]/.test(password);
     };
 
     const handleRegister = async () => {
-        // Trim all inputs
+
         const trimmedName = name.trim();
         const trimmedEmail = email.trim().toLowerCase();
         const trimmedPassword = password.trim();
         const trimmedConfirmPassword = confirmPassword.trim();
 
-        // Validation checks
+
         if (!trimmedName || !trimmedEmail || !trimmedPassword || !trimmedConfirmPassword) {
             Alert.alert("Error", "Please fill in all fields");
             return;
@@ -59,7 +57,7 @@ const Register = () => {
         if (!isValidPassword(trimmedPassword)) {
             Alert.alert(
                 "Error",
-                "Password must be at least 6 characters and contain both letters and numbers"
+                "Password must be at least 6 characters long, has at least one lowercase letter, at least one uppercase letter,at least one number and at least onespecial character."
             );
             return;
         }
@@ -94,7 +92,7 @@ const Register = () => {
                     showsVerticalScrollIndicator={false}
                     keyboardShouldPersistTaps="handled"
                 >
-                    {/* Header Section */}
+
                     <View className="items-center mb-8 mt-4">
                         <View className="w-20 h-20 bg-emerald-500 rounded-full items-center justify-center mb-4">
                             <Ionicons name="person-add" size={40} color="white" />
@@ -107,7 +105,7 @@ const Register = () => {
                         </Text>
                     </View>
 
-                    {/* Form Section */}
+
                     <View className="mb-6">
                         <Text className="text-gray-700 font-semibold mb-2 text-sm">Full Name</Text>
                         <View className="flex-row items-center bg-white border border-gray-200 rounded-xl px-4 py-3 mb-4 shadow-sm">
@@ -166,7 +164,6 @@ const Register = () => {
                         </View>
                     </View>
 
-                    {/* Sign Up Button */}
                     <TouchableOpacity
                         className="bg-emerald-500 py-4 rounded-xl shadow-lg shadow-emerald-500/50 mb-6"
                         activeOpacity={0.8}
@@ -178,14 +175,12 @@ const Register = () => {
                         </Text>
                     </TouchableOpacity>
 
-                    {/* Divider */}
                     <View className="flex-row items-center mb-6">
                         <View className="flex-1 h-px bg-gray-200" />
                         <Text className="mx-4 text-gray-400 text-sm">OR</Text>
                         <View className="flex-1 h-px bg-gray-200" />
                     </View>
 
-                    {/* Login Link */}
                     <View className="flex-row justify-center items-center mb-8">
                         <Text className="text-gray-600">Already have an account? </Text>
                         <Link href="/login" asChild>

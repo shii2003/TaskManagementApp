@@ -30,7 +30,7 @@ export const loginAsync = createAsyncThunk(
             const result = await authAPI.login({ email, password });
             return result;
         } catch (error: any) {
-            return rejectWithValue(error.response?.data?.error || 'Login failed. Please try again.');
+            return rejectWithValue(error.response?.data?.message || error.message || 'Login failed. Please try again.');
         }
     }
 );
@@ -42,7 +42,7 @@ export const registerAsync = createAsyncThunk(
             const result = await authAPI.register({ name, email, password, confirmPassword });
             return result;
         } catch (error: any) {
-            return rejectWithValue(error.response?.data?.error || 'Registration failed. Please try again.');
+            return rejectWithValue(error.response?.data?.message || error.message || 'Registration failed. Please try again.');
         }
     }
 );

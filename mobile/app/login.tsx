@@ -46,7 +46,7 @@ const Login = () => {
                     showsVerticalScrollIndicator={false}
                     keyboardShouldPersistTaps="handled"
                 >
-                    {/* Logo/Icon Section */}
+
                     <View className="items-center mb-8">
                         <View className="w-20 h-20 bg-emerald-500 rounded-full items-center justify-center mb-4">
                             <Ionicons name="checkmark-done-circle" size={40} color="white" />
@@ -59,7 +59,7 @@ const Login = () => {
                         </Text>
                     </View>
 
-                    {/* Form Section */}
+
                     <View className="mb-6">
                         <Text className="text-gray-700 font-semibold mb-2 text-sm">Email</Text>
                         <View className="flex-row items-center bg-white border border-gray-200 rounded-xl px-4 py-3 mb-4 shadow-sm">
@@ -91,14 +91,12 @@ const Login = () => {
                         </View>
                     </View>
 
-                    {/* Forgot Password Link */}
                     <TouchableOpacity className="self-end mb-6">
                         <Text className="text-emerald-600 font-semibold text-sm">
                             Forgot Password?
                         </Text>
                     </TouchableOpacity>
 
-                    {/* Login Button */}
                     <TouchableOpacity
                         className="bg-emerald-500 py-4 rounded-xl shadow-lg shadow-emerald-500/50 mb-6"
                         activeOpacity={0.8}
@@ -110,14 +108,12 @@ const Login = () => {
                         </Text>
                     </TouchableOpacity>
 
-                    {/* Divider */}
                     <View className="flex-row items-center my-6">
                         <View className="flex-1 h-px bg-gray-200" />
                         <Text className="mx-4 text-gray-400 text-sm">OR</Text>
                         <View className="flex-1 h-px bg-gray-200" />
                     </View>
 
-                    {/* Register Link */}
                     <View className="flex-row justify-center items-center">
                         <Text className="text-gray-600">Don't have an account? </Text>
                         <Link href="/register" asChild>

@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { AssignedUserEmail } from "../models/Task";
 
 export const createTaskSchema = z
     .object({
@@ -12,7 +13,7 @@ export const createTaskSchema = z
             .enum(["todo", "in_progress", "completed"])
             .optional(),
         assignedTo: z
-            .string()
+            .enum(['john.doe@example.com', 'jane.smith@example.com', 'mike.johnson@example.com', 'sarah.wilson@example.com'])
             .optional(),
     });
 
@@ -28,7 +29,7 @@ export const updateTaskSchema = z
             .enum(["todo", "in_progress", "completed"])
             .optional(),
         assignedTo: z
-            .string()
+            .enum(['john.doe@example.com', 'jane.smith@example.com', 'mike.johnson@example.com', 'sarah.wilson@example.com'])
             .optional(),
     });
 

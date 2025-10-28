@@ -10,7 +10,7 @@ import {
     updateTaskStatus,
 } from "../services/task.services";
 import { createTaskSchema, updateStatusSchema, updateTaskSchema } from "../validations/task.validations";
-import Task from "../models/Task";
+import Task, { AssignedUserEmail } from "../models/Task";
 
 export const createTaskHandler = async (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -22,7 +22,7 @@ export const createTaskHandler = async (req: Request, res: Response, next: NextF
         const userId = req.user?.id;
         const { title, description, status, assignedTo } = parsed.data;
 
-        const result = await createTask(userId!, title, description, status, assignedTo);
+        const result = await createTask(userId!, title, description, status, assignedTo as AssignedUserEmail);
         res
             .status(201)
             .json(ApiResponse.success(
@@ -73,7 +73,10 @@ export const updateTaskHandler = async (req: Request, res: Response, next: NextF
 
         const { id } = req.params;
         const userId = req.user?.id;
-        const result = await updateTask(id, userId!, parsed.data);
+        const result = await updateTask(id, userId!, {
+            ...parsed.data,
+            assignedTo: parsed.data.assignedTo as AssignedUserEmail
+        });
         res
             .status(200)
             .json(ApiResponse.success(
