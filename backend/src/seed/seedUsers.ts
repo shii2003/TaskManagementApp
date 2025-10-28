@@ -1,10 +1,10 @@
-import mongoose from "mongoose";
 import dotenv from "dotenv";
+dotenv.config();
+import mongoose from "mongoose";
 import { hashPassword } from "../utils/hashPassword";
 import User from "../models/User";
 import { MONGO_URI } from "../constants/env";
 
-dotenv.config();
 
 const seedUsers = async () => {
     try {
@@ -19,18 +19,23 @@ const seedUsers = async () => {
 
         const users = [
             {
-                name: "Alice Johnson",
-                email: "alice@example.com",
+                name: "John Doe",
+                email: "john.doe@example.com",
                 password: await hashPassword("Password@123"),
             },
             {
-                name: "Bob Smith",
-                email: "bob@example.com",
+                name: "Jane Smith",
+                email: "jane.smith@example.com",
                 password: await hashPassword("Password@123"),
             },
             {
-                name: "Charlie Brown",
-                email: "charlie@example.com",
+                name: "Mike Johnson",
+                email: "mike.johnson@example.com",
+                password: await hashPassword("Password@123"),
+            },
+            {
+                name: "Sarah Wilson",
+                email: "sarah.wilson@example.com",
                 password: await hashPassword("Password@123"),
             },
         ];

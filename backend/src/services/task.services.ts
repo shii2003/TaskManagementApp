@@ -145,5 +145,3 @@ export const updateTaskStatus = async (id: string, status: TaskStatus) => {
         throw AppError.internal("Something went wrong while updating task status");
     }
 };
-
-//fix validations

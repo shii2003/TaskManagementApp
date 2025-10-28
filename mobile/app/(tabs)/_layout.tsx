@@ -1,6 +1,5 @@
 import { Tabs } from "expo-router";
 import React from "react";
-import { View } from "react-native";
 import { Ionicons, Feather, FontAwesome5 } from "@expo/vector-icons";
 
 const TabsLayout = () => {
